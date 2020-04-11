@@ -1,5 +1,19 @@
 {
+  "version": 2,
   "env": {
     "API_KEY": "@hurl-api-key"
-  }
+  },
+  "builds": [{ "src": "index.js", "use": "@now/node-server" }],
+  "routes": [
+    {
+      "src": "/shortenUrl",
+      "dest": "/index.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    }
+  ]
 }

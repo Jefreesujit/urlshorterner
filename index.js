@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   res.status(404).json({ status: 'NotFound'})
 });
 
-app.post('/shorternUrl', async (req, res) => {
+app.post('/shortenUrl', async (req, res) => {
   const key = Math.random().toString(36).slice(6);
   const url = `${appUrl}/${key}`;
   setRecord({ urlKey: key, url: req.body.url }).then((response) => {
