@@ -1,33 +1,31 @@
-var express = require('express')
-var app = express();
-var http = require('http').Server(app);
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const http = require('http').Server(app);
+const directory = {};
 
-var directory = {};
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get('/fonts/roboto/*', function(req,res){
-  var fileName = req.url.substring(req.url.indexOf('Roboto'));
-  res.sendFile(__dirname + '/fonts/roboto/' + fileName);
-});
-
-app.use(express.static(__dirname + '/css'));
-app.use(express.static(__dirname + '/js'));
-
-app.get('/', function(req,res){
+app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/shorternUrl', function(req,res) {
-  var key = Math.random().toString(36).slice(6);
-  console.log(key);
-  directory[key] = req.query.url;
-  res.send({key: key});
+app.post('/shorternUrl', (req, res) => {
+  const key = Math.random().toString(36).slice(6);
+  console.log(req.body)
+  directory[key] = req.body.url;
+  const url = `${req.headers.host}/${key}`;
+  res.json({ key, url });
 });
 
-app.get('/:urlKey', function(req,res) {
-  var url = directory[req.params.urlKey];
+app.get('/:urlKey', (req, res) => {
+  console.log(req.params);
+  console.log(directory);
+  const url = directory[req.params.urlKey];
   res.redirect(url);
 });
 
-http.listen(process.env.PORT || 3009, function(){
+http.listen(process.env.PORT || 3009, () => {
   console.log("listening on port " + http.address().port);
 });
