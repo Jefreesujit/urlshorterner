@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>AnyZip</title>
-    <meta name="description" content="AnyZip Converter" />
+    <title>Hurl | Shorten Urls for free</title>
+    <meta name="description" content="Hurl Url Shortener" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="src/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="src/css/materialize.min.css"> -->
     <link rel="stylesheet" href="src/css/main.css" type="text/css" />
   </head>
   <body>
@@ -14,7 +14,7 @@
         <div class="logo-icon">
         </div>
         <div class="page-header">
-          AnyZip
+          Hurl Shortener
         </div>
       </div>
     </header>
@@ -23,27 +23,29 @@
       <div class="page-container">
         <div class="center-pane">
           <div class="row center">
-            <div class="col s12">
-              <h5 class="light message-box">This free ZIP converter lets you easily compress your files to ZIP format. </h5>
+            <div class="">
+              <h5 class="light message-box">Welcome to Hurl.cf, a free tool to shorten links and URLs. Its totally free to use with unlimited, AD-Free service.
+              Use our URL Shortener to create a shortened link making it easy to remember and share. </h5>
             </div>
           </div>
-          <div class="row center">
-            <div class="col s12 file-field input-field">
-              <div class="btn upload-btn">
-                <span>Upload Files</span>
-                <input type="file" multiple required id="file_input">
-              </div>
+          <div name="urlform" class="input-section">
+            <div class="input-container">
+              <input placeholder="Enter link here" id="inputUrl" type="text" class="url-input-field">
+              <button onClick="shortenUrl()" id="shortenBtn" class="btn shorten-btn">Shorten URL</button>
             </div>
           </div>
-          <div class="col s12 status-section" id="status_section">
+          <div class="output-section hidden">
+            <div class="input-container">
+              <input id="outputUrl" type="text" class="url-output-field" readonly>
+              <button onClick="copyLink()" id="copyBtn" class="btn copy-btn">&#10064;</button>
+            </div>
           </div>
-          <div class="col s12 file-name-container">
-            <div class="input-field col s7">
-              <input placeholder="File Name" id="file_name" type="text" class="validate">
-            </div>
-            <div class="generate-btn col s5 ">
-              <button onClick="uploadFile()" id="save_btn" class="waves-effect waves-light btn">Generate Zip</button>
-            </div>
+          <div class="hidden status-section" id="status_section">
+            The link has been copied!
+          </div>
+          <div class="service-section center" id="status_section">
+            <p><a class="api-link" onclick="showApiSection()" >Looking for API service to shorten urls?</a></p>
+            <pre class="curl-code hidden">curl -i -X POST -H "Content-Type: application/json" -d "{\"url\":\"YOUR_URL_HERE\"}" https://api.hurl.cf/shortenUrl</pre>
           </div>
         </div>
       </div>
@@ -54,9 +56,6 @@
         Developed by Jefree Sujit.
       </div>
     </footer>
-    <script type="text/javascript" src="src/js/filesaver.js"></script>
-    <script type="text/javascript" src="src/js/jszip.min.js"></script>
-    <script type="text/javascript" src="src/js/jszip-utils.min.js"></script>
     <script type="text/javascript" src="src/js/main.js"></script>
   </body>
 </html>
