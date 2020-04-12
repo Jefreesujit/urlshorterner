@@ -21,12 +21,7 @@
     {
       "src": "/shortenUrl",
       "dest": "/index.js",
-      "methods": ["POST"],
-      "headers": {
-        "Access-Control-Allow-Origin" : "*",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-      }
+      "methods": ["POST", "OPTIONS"]
     },
     {
       "src": "/.*",
