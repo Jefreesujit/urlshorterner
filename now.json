@@ -3,12 +3,30 @@
   "env": {
     "API_KEY": "@hurl-api-key"
   },
-  "builds": [{ "src": "index.js", "use": "@now/node-server" }],
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@now/node-server"
+    },
+    {
+      "src": "/src/css/*.css",
+      "use": "@now/static"
+    },
+    {
+      "src": "/src/js/*.js",
+      "use": "@now/static"
+    }
+  ],
   "routes": [
     {
       "src": "/shortenUrl",
       "dest": "/index.js",
-      "methods": ["POST"]
+      "methods": ["POST"],
+      "headers": {
+        "Access-Control-Allow-Origin" : "*",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+      }
     },
     {
       "src": "/.*",

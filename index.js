@@ -13,8 +13,9 @@ app.use(bodyParser.json());
 app.use('/src', express.static('src'));
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   next();
 });
 
@@ -26,8 +27,9 @@ app.get('/', (req, res) => {
 app.post('/shortenUrl', async (req, res) => {
   const key = Math.random().toString(36).slice(6);
   const url = `${appUrl}/${key}`;
+  console.log(req);
   setRecord({ urlKey: key, url: req.body.url }).then((response) => {
-    res.json({ key, url });
+    res.send({key, url});
   }).catch(e => {
     console.log('Error', e);
   });

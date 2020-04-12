@@ -1,4 +1,4 @@
 module.exports = {
   databaseUrl: "https://urlshortener-3878.restdb.io/rest/urltable",
-  appUrl: "http://hurl.cf",
+  appUrl: "hurl.cf",
 };
