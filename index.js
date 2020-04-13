@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require("path");
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
@@ -10,19 +11,18 @@ const { getRecord, setRecord } = require('./dbservice.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/src', express.static('src'));
+app.use("/src", express.static(path.join(__dirname, "src")));
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Max-Age', "86400");
+  res.header('Access-Control-Max-Age', 86400);
   next();
 });
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
-  // res.status(404).json({ status: 'NotFound'})
 });
 
 app.post('/shortenUrl', async (req, res) => {
@@ -38,7 +38,7 @@ app.post('/shortenUrl', async (req, res) => {
 });
 
 app.get('/:urlKey', async (req, res) => {
-  if (req.params.urlKey) {
+  if (req.params.urlKey && req.params.urlKey !== 'favicon.ico') {
     getRecord(req.params.urlKey)
       .then((response) => {
         const [{ url }] = JSON.parse(response);

@@ -9,15 +9,15 @@
       "use": "@now/node-server"
     },
     {
-      "src": "/src/css/*.css",
-      "use": "@now/static"
-    },
-    {
-      "src": "/src/js/*.js",
+      "src": "src/**",
       "use": "@now/static"
     }
   ],
   "routes": [
+    {
+      "src": "/(.+css|.+js|.+ico|robots.txt|browserconfig.xml)",
+      "dest": "/src/$1"
+    },
     {
       "src": "/shortenUrl",
       "dest": "/index.js",

@@ -10,14 +10,13 @@ const getShortenedUrl = async (url) => {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-      .then((response) => response.json())
-      .then((response) => resolve(response))
-      .catch((error) => reject(error));
+    .then((response) => response.json())
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
   });
 }
 
 const shortenUrl = async (event) => {
-  console.log(event);
   const inputUrl = el("#inputUrl").value;
   const regex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
 
